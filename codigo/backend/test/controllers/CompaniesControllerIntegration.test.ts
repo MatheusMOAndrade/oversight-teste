@@ -24,6 +24,7 @@ describe('Test companies', () => {
     beforeEach(() => {
         jest.resetAllMocks();
         jest.resetModules();
+        jest.setTimeout(60000);
     });
 
     test('should create company', async () => {

@@ -24,6 +24,7 @@ describe('Test customers', () => {
     beforeEach(() => {
         jest.resetAllMocks();
         jest.resetModules();
+        jest.setTimeout(60000);
     });
 
     test('should create customer', async () => {

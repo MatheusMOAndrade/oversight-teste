@@ -27,3 +27,5 @@ class ServiceListChanged extends ServiceState {
     required this.serviceList,
   });
 }
+
+class DeleteServiceFailureState extends ServiceState {}

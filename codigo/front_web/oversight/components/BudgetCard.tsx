@@ -44,7 +44,7 @@ const BudgetCard = ({ description, name, status, id }) => {
 
 export default BudgetCard;
 
-const budgetStatusToLabel = {
+export const budgetStatusToLabel = {
   budgeting: 'Em Aberto',
 
    awaiting: 'Aguardando',

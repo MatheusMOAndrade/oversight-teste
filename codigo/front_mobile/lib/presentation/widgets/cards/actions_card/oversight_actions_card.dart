@@ -130,16 +130,16 @@ class _OversightActionsCardState extends State<OversightActionsCard> {
     late Color color;
 
     switch (status) {
-      case 'recusado':
+      case 'denied':
         text = 'Recusado';
         color = OversightColors.darkRed;
         break;
-      case 'aprovado':
+      case 'approved':
         text = 'Aprovado';
         color = OversightColors.grassGreen;
         break;
       case 'budgeting':
-        text = 'Adicione serviços';
+        text = 'Em Orçamento';
         color = Color.fromARGB(255, 227, 198, 14);
         break;
       default:

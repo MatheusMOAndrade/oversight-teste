@@ -16,7 +16,8 @@ export class MailerService {
 
             const mailer = new Mailer(company);
             const token = Security.JWTEncrypt({
-                companyId, budgetId,
+                companyId,
+                budgetId,
                 title: "",
                 approved: false
             });

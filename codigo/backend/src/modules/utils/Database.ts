@@ -38,7 +38,6 @@ export class Database {
             }
         }
 
-        console.log(query);
         return query;
     }
 }

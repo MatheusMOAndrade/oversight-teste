@@ -1,14 +1,21 @@
 import React from "react";
 import CardWrapper from "./CardWrapper";
-import { Box, Chip } from "@mui/material";
+import { Box, Chip, IconButton } from "@mui/material";
 import Text from "./Text";
 import HandymanIcon from "@mui/icons-material/Handyman";
 import { useRouter } from "next/router";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useCompanyMutations } from "../api/companies";
 
 const CompanyCard = ({ name, email, cnpj, id }) => {
   const router = useRouter();
+  const { deleteCompany } = useCompanyMutations();
 
-  console.log('%cXABLAU','color: blue', name, email, cnpj, id );
+  const handleDeleteCompany = (e) => {
+    console.log('%cXABLAU','color: blue',e );
+    e.stopPropagation()
+    deleteCompany(id);
+  };
 
   return (
     <CardWrapper onClick={() => router.push(`/companies/${id}/edit`)}>
@@ -28,9 +35,9 @@ const CompanyCard = ({ name, email, cnpj, id }) => {
             </Text>
           </Box>
         </Box>
-        <Text variant="h5" sx={{ mr: 2 }}>
-          {/* R$22 */}
-        </Text>
+        <IconButton onClick={handleDeleteCompany} sx={{ ml: 2 }}>
+          <DeleteIcon />
+        </IconButton>
       </Box>
     </CardWrapper>
   );

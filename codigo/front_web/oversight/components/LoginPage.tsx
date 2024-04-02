@@ -16,12 +16,11 @@ import { useAuth } from "../hooks/useAuth";
 
 const LoginPage = () => {
 
-  const {login} = useAuth()
+  const { login } = useAuth()
   const loginForm = useForm({ defaultValues: { email: "", password: "" } });
   const { control, handleSubmit } = loginForm;
 
   const submitLogin = (data) => {
-    console.log("%cXABLAU", "color: blue", data);
     login(data)
   };
 

@@ -193,7 +193,9 @@ class _ServiceCreationState extends State<ServiceCreation> {
                 child: OversightFormFieldDropdown(
                   name: 'mesureUnit',
                   topLabel: 'Unidade de Medida',
-                  placeholder: 'Unidade de medida do serviço',
+                  placeholder: widget.service.mesureUnit != ''
+                      ? widget.service.mesureUnit
+                      : 'Escolha a unidade de medida',
                   style: const OversightDropdownStyle(
                     borderColor: OversightColors.black,
                   ),
@@ -211,6 +213,7 @@ class _ServiceCreationState extends State<ServiceCreation> {
                   name: 'value',
                   topLabel: 'Valor unitário',
                   placeholder: 'Valor unitário do serviço',
+                  initialValue: widget.service.value.toString(),
                   validator: FormBuilderValidators.numeric(),
                   keyboardType: TextInputType.number,
                   style: const OversightInputStyle(
@@ -227,7 +230,9 @@ class _ServiceCreationState extends State<ServiceCreation> {
                 child: OversightFormFieldDropdown(
                   name: 'type',
                   topLabel: 'Tipo de serviço',
-                  placeholder: 'Escolha o tipo de serviço',
+                  placeholder: widget.service.type != ''
+                      ? widget.service.type
+                      : 'Escolha o tipo de serviço',
                   style: const OversightDropdownStyle(
                     borderColor: OversightColors.black,
                   ),
@@ -244,6 +249,7 @@ class _ServiceCreationState extends State<ServiceCreation> {
                   name: 'errorMargin',
                   topLabel: 'Margem de erro',
                   placeholder: 'Margem de erro do serviço, em porcentagem',
+                  initialValue: widget.service.value.toString(),
                   validator: FormBuilderValidators.required(),
                   keyboardType: TextInputType.number,
                   style: const OversightInputStyle(

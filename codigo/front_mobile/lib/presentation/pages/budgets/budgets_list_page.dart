@@ -124,7 +124,7 @@ class _BudgetsListPageState extends State<BudgetsListPage> {
                             status: budgets[index].status,
                             menuItemList: [
                               BubbleMenuItem(
-                                text: 'Edit',
+                                text: 'Editar',
                                 action: () async {
                                   bool? result =
                                       await Navigator.of(context).push(
@@ -146,7 +146,7 @@ class _BudgetsListPageState extends State<BudgetsListPage> {
                                 },
                               ),
                               BubbleMenuItem(
-                                text: 'Delete',
+                                text: 'Deletar',
                                 action: () {
                                   _cubit.deleteBudget(
                                     budgets[index].id.toString(),

@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useAuth } from "./useAuth";
 
-const baseUrl = 'http://localhost:3000'
+const baseUrl = process.env.NEXT_PUBLIC_API_ENDPOINT || 'http://localhost:3000'
 
 const getApiMethods = (apiToken: string) => {
   const getOptions = (method: string, url: string, data?: any) => {

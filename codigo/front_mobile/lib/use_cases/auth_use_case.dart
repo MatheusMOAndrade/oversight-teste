@@ -39,4 +39,8 @@ class AuthUseCase {
     }
     return true;
   }
+
+  Future<void> signOut() async {
+    await authService.signOut();
+  }
 }

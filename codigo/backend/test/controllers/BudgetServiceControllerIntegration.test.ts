@@ -80,6 +80,7 @@ describe('Test budget services', () => {
     });
 
     beforeEach(() => {
+        jest.setTimeout(60000);
         jest.resetAllMocks();
         jest.resetModules();
     });

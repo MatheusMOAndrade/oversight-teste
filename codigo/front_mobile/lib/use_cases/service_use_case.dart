@@ -51,8 +51,17 @@ class ServiceUseCase {
     }
   }
 
-  Future<void> deleteService(String serviceId) async {
+  Future<void> deleteService(
+    String serviceId, {
+    VoidCallback? serviceIsUsedCallback,
+  }) async {
     try {
+      if (await serviceService.checkServiceIsBeingUsed(serviceId)) {
+        if (serviceIsUsedCallback != null) {
+          serviceIsUsedCallback();
+        }
+        return;
+      }
       await serviceService.deleteService(serviceId);
     } on DioExceptions catch (e) {
       throw e.message;

@@ -9,8 +9,6 @@ const Services = () => {
 
   const services = data?.data?.data ?? [];
 
-  console.log("%cXABLAU", "color: blue", services);
-
   return (
     <>
       <Heading title="Serviços" />

@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         backgroundColor: OversightColors.cultured,
         body: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: SafeArea(
             child: Stack(children: [
               const Positioned(

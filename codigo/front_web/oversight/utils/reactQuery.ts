@@ -13,13 +13,11 @@ export const useFetchData = (
 
   const url = pathToUrl(endpoint, { ...params });
 
-  console.log('%cXABLAU','color: blue',endpoint, params );
-
   const queryKey = customQueryKey
     ? customQueryKey
     : !!data
-    ? [url, data]
-    : [url];
+      ? [url, data]
+      : [url];
 
   return useQuery([...queryKey], () => api.get(url, data), {
     enabled: !!endpoint,

@@ -8,6 +8,8 @@ type ListCardProps = {
   rightText: string;
 };
 const ServiceCard = ({ name, description, value }: ListCardProps) => {
+
+  console.log('%cXABLAU','color: blue',name );
   return (
     <Box
       sx={{

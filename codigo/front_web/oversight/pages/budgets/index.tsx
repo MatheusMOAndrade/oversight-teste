@@ -10,8 +10,6 @@ const Budgets = () => {
 
   const budgets = data?.data?.data ?? [];
 
-  console.log("%cXABLAU", "color: blue", budgets);
-
   return (
     <>
       <Heading title="Orçamentos" />

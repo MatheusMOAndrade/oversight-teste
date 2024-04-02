@@ -206,7 +206,7 @@ class _CustomerListState extends State<CustomerList> {
                   .join('/'),
               menuItemList: [
                 BubbleMenuItem(
-                  text: 'Edit',
+                  text: 'Editar',
                   action: () async {
                     CustomerModel customer = customers[index];
 
@@ -233,7 +233,7 @@ class _CustomerListState extends State<CustomerList> {
                   },
                 ),
                 BubbleMenuItem(
-                  text: 'Delete',
+                  text: 'Deletar',
                   action: () {
                     _cubit.deleteCustomer(
                       customers[index].id.toString(),

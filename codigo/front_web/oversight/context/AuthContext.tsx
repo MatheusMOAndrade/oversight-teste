@@ -17,15 +17,11 @@ const AuthProvider = ({ children, guard }) => {
   const router = useRouter();
   const { handleLogin } = useLogin();
 
-  console.log("%cXABLAU", "color: blue", user);
-
   const redirectTo = (destination: string) => {
     guard && router.replace({
       pathname: destination,
     });
   };
-
-  console.log("%cXABLAU", "color: blue", user);
 
   const redirectToAsync = async (destination: string, callback: () => void) => {
     await router.push({
@@ -80,7 +76,7 @@ const AuthProvider = ({ children, guard }) => {
       storeUser(null);
 
       router.push("/login");
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const values = {

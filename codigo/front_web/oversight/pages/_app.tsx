@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { useRouter } from "next/router";
 import AuthGuard from "../components/auth/AuthGuard";
 import { AuthProvider } from "../context/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient({
@@ -20,19 +21,22 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const { pathname } = useRouter();
 
-
-  console.log('%cXABLAU321213','color: blue',Component.guard );
   return (
     <main>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
           <AuthProvider guard={Component.guard ?? true}>
             <AuthGuard guard={Component.guard ?? true}>
-              <MainLayout hideNav={pathname === "/login" ||pathname === "/emailbridge"  }>
+              <MainLayout
+                hideNav={pathname === "/login" || pathname === "/emailbridge"}
+              >
                 <Component {...pageProps} />
+                <Toaster position={"top-right"} toastOptions={{style: {marginTop: 80, marginRight: 70}}}/>
               </MainLayout>
             </AuthGuard>
           </AuthProvider>
+
+         
         </ThemeProvider>
       </QueryClientProvider>
     </main>

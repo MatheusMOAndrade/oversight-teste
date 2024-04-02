@@ -50,10 +50,16 @@ class ServiceCubit extends Cubit<ServiceState> {
     emit(ServiceLoaded(serviceList: serviceList));
   }
 
-  void deleteService(String serviceId) async {
+  void deleteService(
+    String serviceId, {
+    VoidCallback? serviceIsUsedCallback,
+  }) async {
     emit(ServiceLoading());
 
-    await serviceUseCase.deleteService(serviceId);
+    await serviceUseCase.deleteService(
+      serviceId,
+      serviceIsUsedCallback: serviceIsUsedCallback,
+    );
 
     final serviceList = await serviceUseCase.getList();
 

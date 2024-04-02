@@ -5,6 +5,11 @@ import '../../../service/oversight_services/models/oversight_service_model.dart'
 import '../../../service/user/cache_service.dart';
 import 'package:dio/dio.dart';
 
+import '../budget_service/budget_service_service.dart';
+import '../budget_service/models/buget_service_model.dart';
+import '../budgets/budget_service.dart';
+import '../budgets/models/budget_model.dart';
+
 abstract class IServiceService {
   Future<List<ServiceModel>> getServiceList();
 
@@ -18,6 +23,9 @@ abstract class IServiceService {
 class ServiceService implements IServiceService {
   final DioClient dioClient = locator.get<DioClient>();
   final CacheService cacheService = locator.get<CacheService>();
+  final BudgetService budgetService = locator.get<BudgetService>();
+  final BudgetServiceService budgetServiceService =
+      locator.get<BudgetServiceService>();
 
   @override
   Future<List<ServiceModel>> getServiceList() async {
@@ -110,5 +118,29 @@ class ServiceService implements IServiceService {
         .where((element) => element == serviceEmail);
 
     return requiredId.isNotEmpty;
+  }
+
+  Future<bool> checkServiceIsBeingUsed(String incomingServiceId) async {
+    List<BudgetModel> budgetModelList = await budgetService.getBudgetList();
+
+    final List<BudgetServiceModel> foundService = [];
+
+    for (var budgetModel in budgetModelList) {
+      List<BudgetServiceModel> budgetServiceModelList =
+          await budgetServiceService.getBudgetService(budgetModel.id);
+
+      budgetServiceModelList.map((e) => e.serviceId == incomingServiceId);
+
+      final BudgetServiceModel serviceFound = budgetServiceModelList.firstWhere(
+        (element) => element.serviceId == incomingServiceId,
+        orElse: () => const BudgetServiceModel(),
+      );
+
+      if (serviceFound.serviceId != '') {
+        foundService.add(serviceFound);
+      }
+    }
+
+    return foundService.isNotEmpty;
   }
 }

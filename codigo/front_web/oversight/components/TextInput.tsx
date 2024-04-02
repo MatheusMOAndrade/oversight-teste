@@ -1,4 +1,11 @@
-import { InputBase, InputLabel, InputBaseProps, styled, Box } from "@mui/material";
+import {
+  InputBase,
+  InputLabel,
+  InputBaseProps,
+  styled,
+  Box,
+  FormHelperText,
+} from "@mui/material";
 import React from "react";
 import { Controller } from "react-hook-form";
 
@@ -44,19 +51,28 @@ const TextInput = ({ label, name, control, ...props }: TextInputProps) => {
 
   return (
     <Controller
-    name={name}
-    control={control}
-    render={({ field: { onChange, value }, fieldState: { error }, formState: {} }) => (
-      <Box>
-      <InputLabel shrink sx={{ fontSize: 16 }}>
-        {label}
-      </InputLabel>
-      <Base fullWidth value={value} onChange={onChange} {...props} />
-    </Box>
-    )} />
-
-
-  
+      name={name}
+      control={control}
+      render={({
+        field: { onChange, value },
+        fieldState: { error },
+        formState: {},
+      }) => (
+        <Box>
+          <InputLabel shrink sx={{ fontSize: 16 }}>
+            {label}
+          </InputLabel>
+          <Base
+            fullWidth
+            value={value}
+            onChange={onChange}
+            error={!!error?.message}
+            {...props}
+          />
+          <FormHelperText>{error?.message}</FormHelperText>
+        </Box>
+      )}
+    />
   );
 };
 

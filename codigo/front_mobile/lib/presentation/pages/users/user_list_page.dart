@@ -105,7 +105,7 @@ class _UserListState extends State<UserList> {
                             itemName: users[index].name,
                             menuItemList: [
                               BubbleMenuItem(
-                                text: 'Edit',
+                                text: 'Editar',
                                 action: () {
                                   UserModel user = users[index];
                                   _userModel = user;
@@ -119,7 +119,7 @@ class _UserListState extends State<UserList> {
                                 },
                               ),
                               BubbleMenuItem(
-                                text: 'Delete',
+                                text: 'Deletar',
                                 action: () {
                                   _cubit.deleteUser(
                                     users[index].id.toString(),

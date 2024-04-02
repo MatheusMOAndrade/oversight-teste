@@ -56,5 +56,4 @@ app.use('*', GatewayController);
 
 app.listen(process.env.GATEWAY_PORT, async () => {
     await Database.connect();
-    console.log(`A API está online na porta: ${process.env.GATEWAY_PORT}`);
 });

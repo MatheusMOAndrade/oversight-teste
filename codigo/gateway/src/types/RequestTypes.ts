@@ -5,7 +5,8 @@ interface AuthHeaders {
     "auth-token": string,
     "company-id": UUID,
     "user-id": UUID,
-    "role": UserRoles
+    "role": UserRoles,
+    "budget-id"?: UUID,
 }
 
 export {

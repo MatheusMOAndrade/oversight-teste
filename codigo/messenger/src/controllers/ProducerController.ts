@@ -7,7 +7,6 @@ export const ProducerController = Router();
 
 ProducerController.post('/', Security.middleware, async (req: Request, res: Response) => {
     try {
-        console.log("produce")
         const message: Message = {
             title: "Email approval",
             approved: req.body.approved,
@@ -18,6 +17,7 @@ ProducerController.post('/', Security.middleware, async (req: Request, res: Resp
 
         await Producer.post(message);
 
+        console.log("produced")
         return res.status(200).send("Message posted successfuly.");
     } catch (error) {
         if (error.status) {

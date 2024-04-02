@@ -15,6 +15,8 @@ abstract class IAuthService {
 
   Future<void> signIn(String email, String password);
 
+  Future<void> signOut();
+
   Future<void> signUp(String email, String password);
 
   Future<UserModel?> getUser({required String token});
@@ -97,5 +99,10 @@ class AuthService implements IAuthService {
       ),
     );
     print('The api response is $response');
+  }
+
+  @override
+  Future<void> signOut() async {
+    await cacheService.deleteData(key: "token");
   }
 }

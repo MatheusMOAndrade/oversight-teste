@@ -14,8 +14,11 @@ GatewayController.all('*', Auth.middleware, async (req: Request, res: Response) 
             "company-id": UUID.fromString(String(req.headers['company-id'])),
             "user-id": UUID.fromString(String(req.sessionID)),
             "role": userRoleFromString(String(req.headers['role'])),
-            "auth-token": Security.genHash()
+            "auth-token": Security.genHash(),
+            "budget-id": String(req.headers['budget-id']) ?? null,
         }
+        console.log("----- Received Gateway Headers -----", req.headers);
+        console.log("----- Sent Gateway Headers -----", headers);
 
         const body = Object.keys(req.body).length > 0 ? req.body : null;
 

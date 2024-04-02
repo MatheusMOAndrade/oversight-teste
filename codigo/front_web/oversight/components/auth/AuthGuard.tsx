@@ -15,24 +15,12 @@ interface AuthGuardProps {
 const AuthGuard = (props: AuthGuardProps) => {
   const { children, guard } = props;
 
-  console.log('%cXABLAU','color: blue',guard );
   const auth = useAuth();
   const router = useRouter();
-  //   const { schema } = useGetQueryParams()
-
-  //   useEffect(
-  //     () => {
-  //       auth.tokenRefreshHandler()
-  //     },
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //     [router.route]
-  //   )
-
-  console.log("%cXABLAU", "color: blue", auth.user);
 
   useEffect(
     () => {
-      if(!guard) return
+      if (!guard) return
 
       if (!router.isReady) {
         return;
@@ -43,7 +31,7 @@ const AuthGuard = (props: AuthGuardProps) => {
       if (!auth.user) {
         router.replace({
           pathname: "/login",
-          
+
         });
       }
 
@@ -57,7 +45,7 @@ const AuthGuard = (props: AuthGuardProps) => {
     [router.route, auth.user]
   );
 
-  if(!guard)return <>{children}</>;
+  if (!guard) return <>{children}</>;
 
   if (!auth.user && !router.asPath.includes('login')) {
     return "";

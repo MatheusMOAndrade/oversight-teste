@@ -268,7 +268,7 @@ class _BudgetServicesPageState extends State<BudgetServicesPage> {
                                     price: budgetServices[index].value,
                                     menuItemList: [
                                       BubbleMenuItem(
-                                        text: 'Delete',
+                                        text: 'Deletar',
                                         action: () {
                                           _cubit.deleteBudgetService(
                                             widget.budgetId,
@@ -311,7 +311,7 @@ class _BudgetServicesPageState extends State<BudgetServicesPage> {
                                       createdAt: 'XX/XX/XXXX',
                                       menuItemList: [
                                         BubbleMenuItem(
-                                          text: 'Delete',
+                                          text: 'Deletar',
                                           action: () {},
                                         ),
                                       ],
@@ -489,12 +489,12 @@ class _BudgetServicesPageState extends State<BudgetServicesPage> {
   <p>$budgetValue reais</p>
 
   <p id="acceptButton">Aceitar Orçamento</p>
-  http://0.0.0.0/mail?message-token=$messageToken&approved=true
+  http://ec2-3-83-212-243.compute-1.amazonaws.com/emailbridge?message-token=$messageToken&approved=true
 
   <br/>
   <br/>
   <p id="declineButton">Recusar Orçamento</p>
-  http://0.0.0.0/mail?message-token=$messageToken&approved=false
+  http://ec2-3-83-212-243.compute-1.amazonaws.com/emailbridge?message-token=$messageToken&approved=false
 
   </body>
   </html>

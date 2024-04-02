@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Heading from "../../components/Heading";
 import { Alert, Box, Button, Grid, Typography } from "@mui/material";
 import ServiceCard from "../../components/ServiceCard";
@@ -7,13 +7,27 @@ import { useGetBudgets } from "../../api/budgets";
 import Link from "next/link";
 import CompanyCard from "../../components/CompanyCard";
 import { useGetCompanies } from "../../api/companies";
+import { useAuth } from "../../hooks/useAuth";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
 
 const Companies = () => {
   const { data } = useGetCompanies();
+  const { user } = useAuth();
+  const router = useRouter();
+
+
+  useEffect(() => {
+    user.role != "master" &&
+      router.replace({
+        pathname: "/budgets",
+      });
+  }, []);
 
   const companies = data?.data?.data ?? [];
 
-  console.log("%cXABLAU", "color: blue", companies);
+  console.log('%cXABLAU','color: blue', companies);
+
 
   return (
     <>
@@ -25,9 +39,9 @@ const Companies = () => {
       </Box>
 
       <Grid container spacing={2} sx={{ mt: 2 }}>
-        {companies.map((budget) => (
-          <Grid key={budget.id} item xs={6}>
-            <CompanyCard {...budget} />
+        {companies.map((company) => (
+          <Grid key={company.id} item xs={6} hidden={company.name === 'Oversight'}>
+            <CompanyCard {...company} />
           </Grid>
         ))}
       </Grid>

@@ -8,20 +8,18 @@ const EmailBridge = () => {
   const { query } = useRouter();
   const { approved } = query;
   const messageToken = query["message-token"] as string;
-
-  console.log('%cXABLAU','color: blue',approved, messageToken );
-
+  const host = process.env.NEXT_PUBLIC_API_ENDPOINT || "http://localhost:3000";
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
 
-    if(!messageToken) return
-    
+    if (!messageToken) return
+
     const emailRequest = async () => {
       try {
-        const res = await fetch("http://localhost:3000/message", {
+        const res = await fetch(host + "/message", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -34,19 +32,17 @@ const EmailBridge = () => {
         });
 
         if (!res.ok) {
-         
+
           throw new Error();
         }
 
         setIsLoading(false);
       } catch {
-
-        console.log('%cXABLAU','color: blue','entrou' );
         setError(true);
         setIsLoading(false);
       }
 
-    
+
     };
 
     emailRequest();

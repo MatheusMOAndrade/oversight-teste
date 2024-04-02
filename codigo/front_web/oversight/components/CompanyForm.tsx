@@ -14,6 +14,8 @@ import { useForm } from "react-hook-form";
 import TextInput from "./TextInput";
 import { useCompanyMutations, useGetCompany } from "../api/companies";
 import { useRouter } from "next/router";
+import { joiResolver } from "../utils/resolver";
+import { companySchema } from "../utils/companyValidation";
 
 const defaultValues = {
   email: "",
@@ -27,21 +29,18 @@ const CompanyForm = () => {
   const { companyId } = query;
   const isEdit = !!companyId;
 
-  const {data} = useGetCompany(companyId)
-  const companyData = data?.data.data ?? defaultValues
+  const { data } = useGetCompany(companyId);
+  const companyData = data?.data.data ?? defaultValues;
 
-
-
-
-  console.log('%cXABLAU','color: blue',companyData );
-
-  const companyForm = useForm({ defaultValues: companyData });
+  const companyForm = useForm({
+    defaultValues: companyData,
+    resolver: joiResolver(companySchema),
+  });
   const { control, handleSubmit, reset } = companyForm;
 
-  useEffect(()=>{
-    reset({...companyData})
-
-  }, [companyData])
+  useEffect(() => {
+    reset({ ...companyData });
+  }, [companyData]);
 
   const { addCompany, editCompany, isLoading } = useCompanyMutations();
 

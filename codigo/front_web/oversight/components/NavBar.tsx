@@ -23,6 +23,7 @@ import GooglePlayLogo from "../public/img/googlePlayLogo2.png";
 import { useAuth } from "../hooks/useAuth";
 import LogoutIcon from "@mui/icons-material/Logout";
 import BusinessIcon from "@mui/icons-material/Business";
+import PeopleIcon from '@mui/icons-material/People';
 
 const NavBar = () => {
   const { pathname } = useRouter();
@@ -36,7 +37,6 @@ const NavBar = () => {
     return { opacity: pathname.includes(routeName) ? "1" : "0.5" };
   };
 
-  console.log("%cXABLAU", "color: blue", pathname);
   return (
     <Wrapper data-testid="navbar">
       <Box
@@ -89,16 +89,28 @@ const NavBar = () => {
             </ListItemButton>
           </ListItem>
         </Link>
-        <Link href="/companies">
+        {user.role == "master" ? (
+          <Link href="/companies">
+            <ListItem disablePadding>
+              <ListItemButton
+                data-testid="companies-link"
+                sx={getIsCurrentRouteOpacity("companies")}
+              >
+                <ListItemIcon>
+                  <BusinessIcon sx={{ color: "white" }} />
+                </ListItemIcon>
+                <ListItemText primary="empresas" />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        ) : null}
+        <Link href="/costumers">
           <ListItem disablePadding>
-            <ListItemButton
-              data-testid="companies-link"
-              sx={getIsCurrentRouteOpacity("companies")}
-            >
+            <ListItemButton sx={getIsCurrentRouteOpacity("costumers")}>
               <ListItemIcon>
-                <BusinessIcon sx={{ color: "white" }} />
+                <PeopleIcon sx={{ color: "white" }} />
               </ListItemIcon>
-              <ListItemText primary="empresas" />
+              <ListItemText primary="clientes" />
             </ListItemButton>
           </ListItem>
         </Link>

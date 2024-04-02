@@ -68,7 +68,9 @@ export class Security {
     }
 
     static JWTDecrypt<T>(sessionToken: string): T {
+        console.log("----- Decript Token -----");
         const userData = verify(sessionToken, process.env.KEY) as T;
+        console.log({ userData })
         return userData;
     }
 

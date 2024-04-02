@@ -1,31 +1,32 @@
 cff-version: 1.0.1
 message: Please cite this software using these metadata.
-title: 
+title: Oversight
 authors:
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names:
+  - family-names: Gomes Ferreira 
+    given-names: Bruno
+  - family-names: Mairinque De Azevedo
+    given-names: Jõao Pedro
+  - family-names: Andrade Machado
+    given-names: Matheus
+  - family-names: Vieira dos Santos
+    given-names: Matheus
+  - family-names: Martins Ferreira
+    given-names: Samara
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Norberta de Brito
+    given-names: Aline
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Silva Tavares
+    given-names: Cleiton
 keywords:
-  - 
-  - 
-repository-code: 
+  - Aplicação Web
+  - Aplicação Mobile
+  - Gerenciador de orçamentos
+  - Engenharia de Software
+  - PUC Minas
+repository-code: https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti5-5104100-oversight
 license: CC-BY-4.0
 version: 1.0.0
-date-released: 2022-07-14
+date-released: 2023-12-13

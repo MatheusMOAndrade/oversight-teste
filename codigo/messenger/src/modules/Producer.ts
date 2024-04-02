@@ -12,6 +12,7 @@ export class Producer {
 
     public static async connect(): Promise<boolean> {
         try {
+            console.log("AMQP Connection: " + `amqp://${this.user}:${this.pass}@${this.host}`);
             this.connection = await connect(`amqp://${this.user}:${this.pass}@${this.host}`);
             this.channel = await this.connection.createChannel();
             this.channel.assertExchange('logs', 'fanout', {

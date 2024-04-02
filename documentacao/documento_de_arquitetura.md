@@ -37,7 +37,7 @@ Para promover uma maior velocidade na comunicação com os clientes, o Oversight
 | **Data**       | **Autor**      | **Descrição**                                                     | **Versão** |
 | -------------- | -------------- | ----------------------------------------------------------------- | ---------- |
 | **05/09/2023** | Samara Martins | Alteração na sessão 01 - preenchimento dos tópicos 1.1, 1.2 e 1.3 | 1.0        |
-|                |                |                                                                   |            |
+| **12/12/2023** | Samara Martins | Alteração pontuais no documento                                   | 1.1        |
 |                |                |                                                                   |            |
 
 ## SUMÁRIO
@@ -74,7 +74,7 @@ No cenário atual dos negócios, a agilidade e a eficiência são cruciais para 
 
 ## 1.1. Problema
 
-No cenário de mercado atual, grande parte das empresas que fornecem serviços e/ou produtos possuem a necessidade de gerir um orçamento para seus clientes antes do ato da compra. Porém, uma boa parte dessas empresas ainda realizam essa tarefa de forma manual ou não conseguem adiquirir um software adequado para isso, tendo em vista os altos custos dessas aplicações, uma vez que, costumam se tratar de softwares mais completos e genéricos, voltados para toda a gestão empresarial (ERP¹).
+No cenário de mercado atual, grande parte das empresas que fornecem serviços e/ou produtos possuem a necessidade de gerir um orçamento para seus clientes antes do ato da compra. Porém, uma boa parte dessas empresas ainda realizam essa tarefa de forma manual ou não conseguem adquirir um software adequado para isso, tendo em vista os altos custos dessas aplicações, uma vez que, costumam se tratar de softwares mais completos e genéricos, voltados para toda a gestão empresarial (ERP¹).
 
 ## 1.2. Objetivos do trabalho
 
@@ -85,6 +85,7 @@ O objetivo geral deste trabalho é apresentar uma descrição completa e detalha
 1. ERP - (Enterprise Resource Planning) é um software empresarial que integra processos e melhora a eficiência organizacional.
 2. RF - (Requisito Funcional) requisitos que o sistema de software ou o componente de sistema deve ser capaz de executar.
 3. RNF - (Requisito Não Funcional) restrições nos serviços e nas funções oferecidas pelo sistema.
+4. UC - (Use Case) refere-se ao diagrama de caso de uso.
 
 <a name="requisitos"></a>
 
@@ -94,24 +95,24 @@ _Esta seção descreve os requisitos comtemplados nesta descrição arquitetural
 
 ## 2.1. Requisitos Funcionais
 
-| **ID** | **Descrição**                                                                                | **Prioridade** |
-| ------ | -------------------------------------------------------------------------------------------- | -------------- |
-| RF001  | O administrador pode gerenciar o usuário no sistema                                          | Alta           |
-| RF002  | O usuário pode fazer login no sistema                                                        | Alta           |
-| RF003  | O usuário pode gerenciar ativos                                                              | Alta           |
-| RF004  | O usuário pode gerenciar cliente                                                             | Alta           |
-| RF005  | O usuário pode gerenciar orçamento                                                           | Alta           |
-| RF006  | O usuário pode acionar o envio do orçamento para cliente por email                           | Alta           |
-| RF007  | O usuário Master pode cadastrar empresa                                                      | Média          |
-| RF008  | O usuário Master pode cadastrar um administrador                                             | Média          |
-| RF009  | O usuário pode emitir PDF do orçamento                                                       | Baixa          |
-| RF010  | O usuário pode inserir percentual de lucro relativo ao orçamento                             | Média          |
-| RF011  | O usuário pode buscar cliente por: nome, email, endereço ou data                             | Média          |
-| RF012  | O sistema de reconhecer a recusa ou aceitação do orçamento do cliente via email              | Alta           |
-| RF013  | O usuário pode buscar orçamento pelo ID ou nome                                              | Média          |
-| RF014  | O usuário pode visualizar listas de orçamentos divididas por status                          | Baixa          |
-| RF015  | O cliente pode modificar o status do orçamento a partir da aceitação do email                | Média          |
-| RF016  | O usuário pode visualizar a quantidade de orçamentos em cada status                          | Baixa          |
+| **ID** | **Descrição**                                                                   | **Prioridade** |
+| ------ | ------------------------------------------------------------------------------- | -------------- |
+| RF001  | O administrador pode gerenciar o usuário no sistema                             | Alta           |
+| RF002  | O usuário pode fazer login no sistema                                           | Alta           |
+| RF003  | O usuário pode gerenciar ativos                                                 | Alta           |
+| RF004  | O usuário pode gerenciar cliente                                                | Alta           |
+| RF005  | O usuário pode gerenciar orçamento                                              | Alta           |
+| RF006  | O usuário pode acionar o envio do orçamento para cliente por email              | Alta           |
+| RF007  | O usuário Master pode cadastrar empresa                                         | Média          |
+| RF008  | O usuário Master pode cadastrar um administrador                                | Média          |
+| RF009  | O usuário pode emitir PDF do orçamento                                          | Baixa          |
+| RF010  | O usuário pode inserir percentual de lucro relativo ao orçamento                | Média          |
+| RF011  | O usuário pode buscar cliente por: nome, email, endereço ou data                | Média          |
+| RF012  | O sistema de reconhecer a recusa ou aceitação do orçamento do cliente via email | Alta           |
+| RF013  | O usuário pode buscar orçamento pelo ID ou nome                                 | Média          |
+| RF014  | O usuário pode visualizar listas de orçamentos divididas por status             | Baixa          |
+| RF015  | O cliente pode modificar o status do orçamento a partir da aceitação do email   | Média          |
+| RF016  | O usuário pode visualizar a quantidade de orçamentos em cada status             | Baixa          |
 
 ## 2.2. Requisitos Não-Funcionais
 
@@ -148,11 +149,11 @@ _Enumere os requisitos não-funcionais previstos para a sua aplicação. Entre o
 
 # 3. Modelagem e projeto arquitetural
 
-_A solução será desenvolvida atravez do padrão arquitetural de micro serviços, no qual o cliente interage sempre com o serviço de autenticação primeiro e, após ser autenticado, é redirecionado para o serviço REST que detém as informações relacionadas à requisição realizada. O serviço de mensageria entra na recepção de aprovação ou reprovação dos orçamentos, no qual o email enviado é o `producer` que envia a resposta para a fila, da qual o `consumer` atualiza o estado do orçamento._
+A solução será desenvolvida atravez do padrão arquitetural de micro serviços, no qual o cliente interage sempre com o serviço de autenticação primeiro e, após ser autenticado, é redirecionado para o serviço REST que detém as informações relacionadas à requisição realizada. O serviço de mensageria entra na recepção de aprovação ou reprovação dos orçamentos, no qual o email enviado é o `producer` que envia a resposta para a fila, da qual o `consumer` atualiza o estado do orçamento.
 
-![Visão Geral da Solução](imagens/visao.png "Visão Geral da Solução")
+![Visão Geral da Solução](imagens/visao.jpeg "Visão Geral da Solução")
 
-**Figura 1 - Visão Geral da Solução (fonte: https://medium.com)**
+**Figura 1 - Visão Geral da Solução.** A imagem exibe a aquitetura geral do sistema, demonstrando a integração com serviços na nuvem através da AWS.
 
 ## 3.1. Visão de Negócio (Funcionalidades)
 
@@ -173,6 +174,7 @@ _A solução será desenvolvida atravez do padrão arquitetural de micro serviç
 
 ![Caso de uso](imagens/usercase.png)
 
+**Figura 2 - Diagrama de Caso de Uso.** A imagem exibe o diagrama de caso de uso do sistema. São representados três atores de forma hierárquica, onde, o usuário "Master" possui permissão para acessar e utilizar todas as funcionalidades do sistema.
 
 ### 3.1.2 Histórias de Usuário
 
@@ -208,54 +210,83 @@ _A solução será desenvolvida atravez do padrão arquitetural de micro serviç
 
 ![Diagrama de classes](imagens/classes.png "Diagrama de classes")
 
-**Figura 2 – Diagrama de classes (exemplo). Fonte: o próprio autor.**
-
+**Figura 3 – Diagrama de classes.** O diagrama de classes representa uma visão de domínio do sistema, ou seja, foram apresentadas através dele as classes mais significativas da aplicação, bem como seus atributos e métodos.
 
 ### Diagrama de componentes
 
 ![Diagrama de componentes](imagens/componentes.png "Diagrama de componentes")
 
-**Figura 3 – Diagrama de Componentes (exemplo). Fonte: o próprio autor.**
-
+**Figura 4 – Diagrama de Componentes.** A imagem representa a comunicação entre os componentes do sistema, sendo eles: Browser, Server e Database.
 
 ## 3.3. Modelo de dados
 
 ![Diagrama de Entidade Relacionamento (ER) ](imagens/der.png "Diagrama de Entidade Relacionamento (ER) ")
 
-**Figura 4 – Diagrama de Entidade Relacionamento (ER) - exemplo. Fonte: o próprio autor.**
-
+**Figura 5 – Diagrama de Entidade Relacionamento (ER).** Representação de entidades e atributos utilizados na base de dados da aplicação, bem como o relacionamento entre eles.
 
 <a name="avaliacao"></a>
 
 # 4. Avaliação da Arquitetura
 
-_Esta seção descreve a avaliação da arquitetura apresentada, baseada no método ATAM._
+Esta seção descreve a avaliação da arquitetura apresentada, baseada no método ATAM.
 
 ## 4.1. Cenários
 
-_Apresente os cenários de testes utilizados na realização dos testes da sua aplicação. Escolha cenários de testes que demonstrem os requisitos não funcionais sendo satisfeitos. Os requisitos a seguir são apenas exemplos de possíveis requisitos, devendo ser revistos, adequados a cada projeto e complementados de forma a terem uma especificação completa e auto-explicativa._
+**Cenário 1 (RNF001) - Compatibilidade:** o sistema web deve possuir compatibilidade com os navegadores Chrome e Firefox. Ao executar o sistema em qualquer um desses navegadores, erros de compatibilidade não podem ser apresentados.
 
-**Cenário 1 - Acessibilidade:** Suspendisse consequat consectetur velit. Sed sem risus, dictum dictum facilisis vitae, commodo quis leo. Vivamus nulla sem, cursus a mollis quis, interdum at nulla. Nullam dictum congue mauris. Praesent nec nisi hendrerit, ullamcorper tortor non, rutrum sem. In non lectus tortor. Nulla vel tincidunt eros.
+**Cenário 2 (RNF002) - Segurança:** o usuário precisa realizar várias requisições ao atuar na página de orçamentos e não pode ser interrompido durante seu processo.
 
-**Cenário 2 - Interoperabilidade:** Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce ut accumsan erat. Pellentesque in enim tempus, iaculis sem in, semper arcu.
-
-**Cenário 3 - Manutenibilidade:** Phasellus magna tellus, consectetur quis scelerisque eget, ultricies eu ligula. Sed rhoncus fermentum nisi, a ullamcorper leo fringilla id. Nulla lacinia sem vel magna ornare, non tincidunt ipsum rhoncus. Nam euismod semper ante id tristique. Mauris vel elit augue.
-
-**Cenário 4 - Segurança:** Suspendisse consectetur porta tortor non convallis. Sed lobortis erat sed dignissim dignissim. Nunc eleifend elit et aliquet imperdiet. Ut eu quam at lacus tincidunt fringilla eget maximus metus. Praesent finibus, sapien eget molestie porta, neque turpis congue risus, vel porttitor sapien tortor ac nulla. Aliquam erat volutpat.
+**Cenário 3 (RNF003) - Autenticação:** após as comunicações entre front e back-end passarem pelo gateway de autenticação e o mesmo redirecionar as chamadas para as devidas APIs responsáveis, as APIs devem autenticar a validade da requisição através de uma senha AES.
 
 ## 4.2. Avaliação
 
-_Apresente as medidas registradas na coleta de dados. O que não for possível quantificar apresente uma justificativa baseada em evidências qualitativas que suportam o atendimento do requisito não-funcional. Apresente uma avaliação geral da arquitetura indicando os pontos fortes e as limitações da arquitetura proposta._
+### Cenário 1:
 
-| **Atributo de Qualidade:** | Segurança                                                                                                                                                                                                                                                              |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Requisito de Qualidade** | Acesso aos recursos restritos deve ser controlado                                                                                                                                                                                                                      |
-| **Preocupação:**           | Os acessos de usuários devem ser controlados de forma que cada um tenha acesso apenas aos recursos condizentes as suas credenciais.                                                                                                                                    |
-| **Cenários(s):**           | Cenário 4                                                                                                                                                                                                                                                              |
-| **Ambiente:**              | Sistema em operação normal                                                                                                                                                                                                                                             |
-| **Estímulo:**              | Acesso do administrador do sistema as funcionalidades de cadastro de novos produtos e exclusão de produtos.                                                                                                                                                            |
-| **Mecanismo:**             | O servidor de aplicação (Rails) gera um _token_ de acesso para o usuário que se autentica no sistema. Este _token_ é transferido para a camada de visualização (Angular) após a autenticação e o tratamento visual das funcionalidades podem ser tratados neste nível. |
-| **Medida de Resposta:**    | As áreas restritas do sistema devem ser disponibilizadas apenas quando há o acesso de usuários credenciados.                                                                                                                                                           |
+|                            |                                                                                                                                                                                         |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Atributo de qualidade**  | Compatibilidade                                                                                                                                                                         |
+| **Requisito de qualidade** | Possuir executabilidade no chrome e firefox                                                                                                                                             |
+| **Preocupação**            | O sistema deve funcionar corretamente, sem problemas de compatibilidade, tanto no Chrome como no Firefox                                                                                |
+| **Cenários**               | O usuário poderá executar o sistema no Chrome ou Firefox e o mesmo deve se comportar corretamente, ou seja, as funcionalidades devem estar disponíveis e usuais em ambos os navegadores |
+| **Ambiente**               | Sistema em operação regular                                                                                                                                                             |
+| **Estímulo**               | Execução do sistema                                                                                                                                                                     |
+| **Mecanismo**              | Adição de tags do CSS3 que proveem a compatibilidade cross-browser                                                                                                                      |
+| **Medida de Resposta**     | O sistema deve abrir nos navegadores sem erros de compatibilidade                                                                                                                       |
+|                            |                                                                                                                                                                                         |
+
+<br>
+
+### Cenário 2:
+
+|                            |                                                                                                                                                                           |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Atributo de qualidade**  | Segurança                                                                                                                                                                 |
+| **Requisito de qualidade** | Possuir autenticação por tokens JWT                                                                                                                                       |
+| **Preocupação**            | O sistema deve realizar requisições constantes ao backend sem precisar re-autenticar o usuário e sua senha o tempo todo, mas manter segurança evitando autorização eterna |
+| **Cenários**               | O usuário precisa realizar várias requisições ao atuar na página de orçamentos e não pode ser interrompido durante seu processo                                           |
+| **Ambiente**               | Sistema em operação regular                                                                                                                                               |
+| **Estímulo**               | Realizar login no sistema                                                                                                                                                 |
+| **Mecanismo**              | Gateway de Autenticação que gera um token JWT explicável, usado para realizar requisições à API Rest                                                                      |
+| **Medida de Resposta**     | O usuário precisa ter suas credenciais de acesso validadas e, caso as tenha, sua requisição deve prosseguir normalmente                                                   |
+|                            |                                                                                                                                                                           |
+
+<br>
+
+### Cenário 3:
+
+|                            |                                                                                                                                                                                                                                   |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Atributo de qualidade**  | Autenticação                                                                                                                                                                                                                      |
+| **Requisito de qualidade** | Possuir autenticação AES                                                                                                                                                                                                          |
+| **Preocupação**            | O sistema deve ter autenticação AES para às interações internas do sistema (sistema-sistema)                                                                                                                                      |
+| **Cenários**               | Todas as comunicações entre front e back passam primeiro pelo gateway de autenticação, onde ele redireciona as chamadas para as devidas APIs responsáveis, as quais autenticam a validade da requisição através de uma senha AES. |
+| **Ambiente**               | Sistema em operação regular                                                                                                                                                                                                       |
+| **Estímulo**               | Realizar login no sistema / atuar dentro do sistema                                                                                                                                                                               |
+| **Mecanismo**              | Segurança de dados através dos micro-serviços                                                                                                                                                                                     |
+| **Medida de Resposta**     | Possuindo um login válido, não devem haver interrupções na operação do usuário, mantendo sua segurança no máximo                                                                                                                  |
+|                            |                                                                                                                                                                                                                                   |
+
+<br>
 
 **Considerações sobre a arquitetura:**
 
@@ -264,19 +295,72 @@ _Apresente as medidas registradas na coleta de dados. O que não for possível q
 | **Pontos de Sensibilidade:** | Não existe |
 | _ **Tradeoff** _ **:**       | Não existe |
 
-Evidências dos testes realizados
+## Evidências dos testes realizados
 
-_Apresente imagens, descreva os testes de tal forma que se comprove a realização da avaliação._
+Abaixo serão apresentadas as imagens que comprovam a realização dos testes nos cenários descritos acima.
 
-<a name="referencias"></a>
+### Cenário 1:
 
-# 5. REFERÊNCIAS
+![Figura 6: Aplicativo executando no Firefox](imagens/ATAM02.png)
+**Figura 6: Aplicativo executando no Firefox.** a imagem exibe a execução e compatibilidade do sistema com o navegador Firefox.
 
-_Como um projeto da arquitetura de uma aplicação não requer revisão bibliográfica, a inclusão das referências não é obrigatória. No entanto, caso você deseje incluir referências relacionadas às tecnologias, padrões, ou metodologias que serão usadas no seu trabalho, relacione-as de acordo com a ABNT._
+<br>
 
-Verifique no link abaixo como devem ser as referências no padrão ABNT:
+![Figura 7: Aplicativo executado no Chrome](imagens/ATAM03.png)
+**Figura 7: Aplicativo executando no Chrome.** A imagem exibe a execução e compatibilidade do sistema com o navegador Chrome.
+<br>
 
-http://www.pucminas.br/imagedb/documento/DOC\_DSC\_NOME\_ARQUI20160217102425.pdf
+### Cenário 2:
+
+![Figura 8: Login realizado pelo Postman, recebendo o token JWT como “session-token](imagens/ATAM01.png)
+**Figura 8: Execução de login pelo Postman.** A imagem exibe a realização de Login através do Postman, recebendo o token JWT como “session-token".
+<br>
+
+### Cenário 3:
+
+![Figura 9: Log da aplicação](imagens/ATAM04.jfif)
+**Figura 8: Log da aplicação.** A imagem refere-se a um log da aplicação demonstrando o recebimento do token de acesso e validação do mesmo pela API.
+<br>
+
+# 5. Solução
+
+Esta seção apresenta as principais páginas da aplicação.
+
+## 5.1. Tela Inicial
+**Tela de login da aplicação.**
+
+![Tela de login](imagens/mobile1.png "Tela de login")
+
+
+## 5.2. Tela CRUD Serviços
+
+**Tela de cadastro dos serviços.**
+
+![CRUD Serviços](imagens/mobile2.png "CRUD Serviços")
+
+**Tela de listagem dos serviços.**
+
+![CRUD Serviços](imagens/mobile3.png "CRUD Serviços")
+
+
+## 5.3. Tela CRUD Orçamento
+
+**Tela de cadastro de orçamentos.**
+
+![CRUD Orçamentos](imagens/mobile4.png "CRUD Orçamentos")
+
+
+**Tela de listagem de orçamentos.**
+
+![CRUD Orçamentos](imagens/mobile5.png "CRUD Orçamentos")
+
+
+**Tela de gerenciamento dos serviços inclusos no orçamento.**
+
+![CRUD Orçamentos](imagens/mobile6.png "CRUD Orçamentos")
+
+
+# 6. REFERÊNCIAS
 
 **[1]** - _ELMASRI, Ramez; NAVATHE, Sham. **Sistemas de banco de dados**. 7. ed. São Paulo: Pearson, c2019. E-book. ISBN 9788543025001._
 
@@ -287,9 +371,3 @@ http://www.pucminas.br/imagedb/documento/DOC\_DSC\_NOME\_ARQUI20160217102425.pdf
 **[4]** - _SUTHERLAND, Jeffrey Victor. **Scrum: a arte de fazer o dobro do trabalho na metade do tempo**. 2. ed. rev. São Paulo, SP: Leya, 2016. 236, [4] p. ISBN 9788544104514._
 
 **[5]** - _RUSSELL, Stuart J.; NORVIG, Peter. **Inteligência artificial**. Rio de Janeiro: Elsevier, c2013. xxi, 988 p. ISBN 9788535237016._
-
-<a name="apendices"></a>
-
-# 6. APÊNDICES
-
-_Inclua o URL do repositório (Github, Bitbucket, etc) onde você armazenou o código da sua prova de conceito/protótipo arquitetural da aplicação como anexos. A inclusão da URL desse repositório de código servirá como base para garantir a autenticidade dos trabalhos._

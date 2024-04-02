@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 import { Auth } from "../modules/Auth";
-import { UUID } from "../modules/utils/UUID";
 import { Gateway } from "../modules/gateway";
 import { Security } from "../modules/utils/Security";
 
@@ -9,8 +8,8 @@ export const MessageController = Router();
 MessageController.all('*', Auth.middleware, async (req: Request, res: Response) => {
     try {
         const headers = {
-            "company-id": UUID.fromString(String(req.headers['company-id'])),
-            "budget-id": UUID.fromString(String(req.headers['budget-id'])),
+            "company-id": String(req.headers['company-id']),
+            "budget-id": String(req.headers['budget-id']),
             "auth-token": Security.genHash()
         }
 

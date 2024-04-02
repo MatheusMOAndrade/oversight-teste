@@ -42,3 +42,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Except for the released APK
+!/build/app/outputs/apk/release/

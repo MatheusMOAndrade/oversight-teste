@@ -8,8 +8,6 @@ const BudgetServices = ({ budgetId }) => {
 
   const services = data?.data?.data ?? [];
 
-  console.log("%cXABLAU", "color: green", services);
-
   return isLoading ? (
     ""
   ) : services.length ? (

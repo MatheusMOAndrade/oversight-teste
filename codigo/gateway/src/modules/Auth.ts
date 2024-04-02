@@ -11,7 +11,7 @@ export class Auth {
     //Sequence: GET, POST, PUT, DELETE
     private static TablesPermissions = {
         [UserRoles.BASIC]: {
-            [Tables.COMPANIES]: [false, false, false, false],
+            [Tables.COMPANIES]: [true, false, false, false],
             [Tables.USERS]: [false, false, false, false],
             [Tables.CUSTOMERS]: [true, true, true, true],
             [Tables.SERVICES]: [true, true, true, true],
@@ -19,7 +19,7 @@ export class Auth {
             [Tables.BUDGET_SERVICES]: [true, true, true, true],
         },
         [UserRoles.ADMIN]: {
-            [Tables.COMPANIES]: [false, false, false, false],
+            [Tables.COMPANIES]: [true, false, false, false],
             [Tables.USERS]: [true, true, true, true],
             [Tables.CUSTOMERS]: [true, true, true, true],
             [Tables.SERVICES]: [true, true, true, true],

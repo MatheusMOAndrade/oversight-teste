@@ -78,9 +78,10 @@ export class Security {
     }
 
     static JWTEncrypt(mailData: MessageData) {
+        console.log("----- Encript Message Token -----");
         const expireDate = new Date();
         expireDate.setHours(expireDate.getHours() + 72);
-        console.log(expireDate);
+        console.log({ mailData });
 
         return sign(
             {

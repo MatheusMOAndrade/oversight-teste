@@ -7,6 +7,7 @@ import '../../../../themes/oversight_text_styles.dart';
 import 'package:flutter/material.dart';
 
 import '../../../navigation/enums/form_modes.dart';
+import '../../../navigation/navigation.dart';
 import '../../../service/oversight_services/models/oversight_service_model.dart';
 import '../../../stores/service/service_cubit.dart';
 import '../../widgets/widgets.dart';
@@ -38,9 +39,19 @@ class _OversightServicesPageState extends State<OversightServicesPage> {
     super.initState();
   }
 
+  void showServiceIsAlreadyUsed() {
+    showToast(
+      context,
+      'Serviço sendo utilizado num orçamento',
+      Icons.close,
+      OversightColors.darkRed,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: const OversightDrawer(),
       appBar: OversightAppBar(
         style: const OversightAppBarStyle(
           backgroundColor: OversightColors.cultured,
@@ -188,35 +199,33 @@ class _OversightServicesPageState extends State<OversightServicesPage> {
               //     .join('/'),
               menuItemList: [
                 BubbleMenuItem(
-                  text: 'Edit',
-                  action: () {
+                  text: 'Editar',
+                  action: () async {
                     ServiceModel service = services[index];
 
                     _serviceModel = service;
 
-                    // _addressModel = addressList.firstWhere(
-                    //   (element) =>
-                    //       element.serviceId == _serviceModel.id,
-                    // );
+                    bool? result = await navigator?.push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => ServiceCreation(
+                          service: services[index],
+                          serviceId: services[index].id,
+                          formMode: FormMode.update,
+                        ),
+                      ),
+                    );
 
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (BuildContext context) =>
-                    //         ServiceCreation(
-                    //       service: _serviceModel,
-                    //       serviceId:
-                    //           services[index].id.toString(),
-                    //       formMode: FormMode.update,
-                    //     ),
-                    //   ),
-                    // );
+                    if (result != null) {
+                      _cubit.init();
+                    }
                   },
                 ),
                 BubbleMenuItem(
-                  text: 'Delete',
+                  text: 'Deletar',
                   action: () {
                     _cubit.deleteService(
                       services[index].id.toString(),
+                      serviceIsUsedCallback: showServiceIsAlreadyUsed,
                     );
                   },
                 ),

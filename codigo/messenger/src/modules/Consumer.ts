@@ -35,7 +35,7 @@ export class Consumer {
     private static async processMessage(message: ConsumeMessage) {
         try {
             const msg = JSON.parse(message.content.toString()) as Message;
-            console.log({ msg });
+            console.log("consumed", { msg });
             const status = msg.approved ? 'approved' : 'denied';
             const description = msg.description ?? null;
 

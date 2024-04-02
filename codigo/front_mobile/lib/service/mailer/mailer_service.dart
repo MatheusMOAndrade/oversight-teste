@@ -17,14 +17,11 @@ class MailerService implements IMailerService {
   @override
   Future<String> getToken(String budgetId) async {
     final token = await cacheService.getData(key: "token");
-
+    print("sending budgetId: $budgetId");
     final response = await dioClient.get(
       Endpoints.mailerToken,
       options: Options(
-        headers: {
-          "session-token": token,
-          "budget-id": budgetId,
-        },
+        headers: {"session-token": token, "budget-id": budgetId},
       ),
     );
 
